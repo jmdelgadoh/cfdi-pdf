@@ -1,16 +1,10 @@
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { generatePdfContent, Options } from './builder/generateContent';
+import { dataToCfdi } from './parser/dataToCfdi';
+import { parseXml } from './parser/xmlToData';
 import { toCurrency } from './utils/toCurrency';
-import {
-    CatalogItem,
-    clavesUnidadesRaw,
-    formasPagosRaw,
-    impuestosRaw,
-    metodosPagoRaw,
-    monedasRaw,
-    regimenesFiscalesRaw,
-    tiposComprobantesRaw,
-    tiposRelacionesRaw,
-    usosCfdiRaw,
-} from './catalogs';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 /**
  * CfdiPdf namespace
@@ -24,22 +18,19 @@ export namespace CfdiPdf {
      */
     export const numberToCurrency = toCurrency;
 
-    /**
-     * Catalogs namespace
-     */
-    export namespace Catalogs {
-        export const clavesUnidades: Array<CatalogItem> = clavesUnidadesRaw;
-        export const formasPago: Array<CatalogItem> = formasPagosRaw;
-        export const impuestos: Array<CatalogItem> = impuestosRaw;
-        export const metodosPago: Array<CatalogItem> = metodosPagoRaw;
-        export const monedas: Array<CatalogItem> = monedasRaw;
-        export const regimenesFiscales: Array<CatalogItem> = regimenesFiscalesRaw;
-        export const tiposComprobantes: Array<CatalogItem> = tiposComprobantesRaw;
-        export const tiposRelaciones: Array<CatalogItem> = tiposRelacionesRaw;
-        /**
-         * CFDI Uses Catalog
-         * @returns {Array<CatalogItem>}
-         */
-        export const usosCfdi: Array<CatalogItem> = usosCfdiRaw;
-    }
+    export const generatePdf = (xml: string, options: Options = {}): Promise<string> => {
+        return new Promise<string>(async (resolve, reject) => {
+            try {
+                const xmlData = await parseXml(xml);
+                const cfdiData = await dataToCfdi(xmlData);
+                const content = await generatePdfContent(cfdiData, options);
+                const pdfDocGenerator = pdfMake.createPdf(content);
+                pdfDocGenerator.getBase64((data) => {
+                    resolve(data);
+                });
+            } catch (e) {
+                reject(e);
+            }
+        });
+    };
 }
