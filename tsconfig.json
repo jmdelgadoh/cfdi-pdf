@@ -1,0 +1,8 @@
+{
+    "compilerOptions": {
+        "outDir": "dist",
+        "lib": ["esnext"],
+        "sourceMap": true
+    },
+    "include": ["src/**/*.ts"]
+}
