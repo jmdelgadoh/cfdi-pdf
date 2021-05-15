@@ -1,3 +1,3 @@
-export function hello(name: string): string {
-    return `Hello ${name}`;
-}
+import { CfdiPdf } from "./CfdiPdf";
+export default CfdiPdf;
+Object.assign(module.exports, CfdiPdf);
