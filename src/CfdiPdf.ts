@@ -18,6 +18,12 @@ export namespace CfdiPdf {
      */
     export const numberToCurrency = toCurrency;
 
+    /**
+     * Function to get pdf from valid xml cfdi string
+     * @param {string} xml
+     * @param {Options=} options 
+     * @returns {Promise<string>} a pdf in base64 string
+     */
     export const generatePdf = (xml: string, options: Options = {}): Promise<string> => {
         return new Promise<string>(async (resolve, reject) => {
             try {
