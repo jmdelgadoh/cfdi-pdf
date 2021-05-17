@@ -1,6 +1,6 @@
 # cfdi-pdf
 
-A small library for generate xml CFDI PDF
+A small library for generate xml CFDI 3.3 to PDF
 
 ## How to install
 
@@ -66,7 +66,7 @@ try{
 ```
 ## Features
 
-* Generate PDF
+* Generate PDF from types: I, E, T and P
 
 ## License
 
