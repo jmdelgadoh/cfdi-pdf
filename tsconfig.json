@@ -4,7 +4,11 @@
         "lib": ["esnext"],
         "esModuleInterop": true,
         "sourceMap": true,
-        "resolveJsonModule": true
+        "resolveJsonModule": true,
+        "declaration": true,
+        // This compiler run should
+        // only output d.ts files
+        "emitDeclarationOnly": true
     },
     "include": ["src/**/*.ts", "src/catalogs/*.json"]
 }
