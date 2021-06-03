@@ -18,8 +18,48 @@ import { TDocumentDefinitions } from 'pdfmake/interfaces';
 export interface Options {
     text?: string;
     image?: string;
+    residenciaFiscal?: string;
     cadenaOriginal?: string;
 }
+
+const generateImpuestos = (concepto: Concepto) => {
+    const arr = [];
+    if (concepto.traslados.length > 0) {
+        arr.push('Traslados');
+        const content = concepto.traslados.map((traslado) => {
+            return [
+                impuestosCatalog[traslado.impuesto]
+                    ? `${traslado.impuesto} - ${impuestosCatalog[traslado.impuesto]}`
+                    : '',
+                traslado.tipoFactor == 'Exento' ? 'EXENTO' : `${formatCurrency(traslado.importe)}`,
+            ];
+        });
+        arr.push({
+            table: {
+                body: content,
+            },
+            layout: 'noBorders',
+        });
+    }
+    if (concepto.retenciones.length > 0) {
+        arr.push('Retenciones');
+        const content = concepto.retenciones.map((retencion) => {
+            return [
+                impuestosCatalog[retencion.impuesto]
+                    ? `${retencion.impuesto} - ${impuestosCatalog[retencion.impuesto]}`
+                    : '',
+                `${formatCurrency(retencion.importe)}`,
+            ];
+        });
+        arr.push({
+            table: {
+                body: content,
+            },
+            layout: 'noBorders',
+        });
+    }
+    return arr;
+};
 
 const generateConceptsTable = (conceptos: Array<Concepto>) => {
     const arr: Array<any> = conceptos.map((concepto: Concepto) => [
@@ -30,10 +70,11 @@ const generateConceptsTable = (conceptos: Array<Concepto>) => {
         concepto.descripcion,
         `${formatCurrency(concepto.valorUnitario)}`,
         `${formatCurrency(concepto.descuento)}`,
-        impuestosCatalog[concepto.impuestoTraslado]
-            ? `${concepto.impuestoTraslado} - ${impuestosCatalog[concepto.impuestoTraslado]}`
-            : '',
-        `${formatCurrency(concepto.importeTraslado)}`,
+        {
+            colSpan: 2,
+            stack: generateImpuestos(concepto),
+        },
+        '',
         `${formatCurrency(concepto.importe)}`,
     ]);
     arr.unshift([
@@ -456,6 +497,8 @@ export const generatePdfContent = async (json: Cfdi, options: Options) => {
     // eslint-disable-next-line
     const logo = options.image;
     if (options.cadenaOriginal) json.cadenaOriginalCC = options.cadenaOriginal;
+    if (options.residenciaFiscal && !json.receptor.residenciaFiscal)
+        json.receptor.residenciaFiscal = options.residenciaFiscal;
     const dd: TDocumentDefinitions = {
         content: await generateContent(json, logo, options.text),
         styles: {

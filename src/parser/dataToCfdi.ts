@@ -2,7 +2,10 @@ import { exists, existsValue } from '../utils/check';
 
 export class Retencion {
     impuesto: string;
+    tipoFactor: string;
+    tasaOCuota: string;
     importe: string;
+    base?: string;
 }
 
 export class Traslado {
@@ -10,6 +13,7 @@ export class Traslado {
     tipoFactor: string;
     tasaOCuota: string;
     importe: string;
+    base?: string;
 }
 
 export class DoctoRelacionado {
@@ -56,16 +60,8 @@ export class Concepto {
     importe: string;
     descripcion: string;
     descuento: string;
-    baseTraslado: string;
-    impuestoTraslado: string;
-    tipoFactorTraslado: string;
-    tasaOCuotaTraslado: string;
-    importeTraslado: string;
-    baseRetencion: string;
-    impuestoRetencion: string;
-    tipoFactorRetencion: string;
-    tasaOCuotaRetencion: string;
-    importeRetencion: string;
+    traslados: Array<Traslado>;
+    retenciones: Array<Retencion>;
 }
 
 export class Receptor {
@@ -160,18 +156,34 @@ export const dataToCfdi = (xmlData: any): Promise<Cfdi> => {
             if (comprobanteConceptos) {
                 const comprobanteConcepto = comprobanteConceptos[0]['cfdi:Concepto'];
                 if (comprobanteConcepto) {
-                    obj.conceptos = comprobanteConcepto.map((concepto: any) => {
-                        let traslado: any;
-                        let retencion: any;
+                    obj.conceptos = comprobanteConcepto.map((concepto: any): Concepto => {
+                        let trasladosArr: Array<Traslado> = [];
+                        let retencionesArr: Array<Retencion> = [];
                         const impuestos = concepto['cfdi:Impuestos'];
                         if (impuestos) {
                             const traslados = impuestos[0]['cfdi:Traslados'];
                             const retenciones = impuestos[0]['cfdi:Retenciones'];
                             if (traslados) {
-                                traslado = traslados[0]['cfdi:Traslado'];
+                                const traslado = traslados[0]['cfdi:Traslado'];
+                                trasladosArr = traslado.map((elem: any) => {
+                                    return {
+                                        impuesto: elem.$.Impuesto,
+                                        tipoFactor: elem.$.TipoFactor,
+                                        tasaOCuota: elem.$.TasaOCuota,
+                                        importe: elem.$.Importe,
+                                    };
+                                });
                             }
                             if (retenciones) {
-                                retencion = retenciones[0]['cfdi:Retencion'];
+                                const retencion = retenciones[0]['cfdi:Retencion'];
+                                retencionesArr = retencion.map((elem: any) => {
+                                    return {
+                                        impuesto: elem.$.Impuesto,
+                                        tipoFactor: elem.$.TipoFactor,
+                                        tasaOCuota: elem.$.TasaOCuota,
+                                        importe: elem.$.Importe,
+                                    };
+                                });
                             }
                         }
                         return {
@@ -184,16 +196,8 @@ export const dataToCfdi = (xmlData: any): Promise<Cfdi> => {
                             importe: existsValue(concepto.$.Importe),
                             descripcion: exists(concepto.$.Descripcion),
                             descuento: existsValue(concepto.$.Descuento),
-                            baseTraslado: traslado ? existsValue(traslado[0].$.Base) : '',
-                            impuestoTraslado: traslado ? exists(traslado[0].$.Impuesto) : '',
-                            tipoFactorTraslado: traslado ? exists(traslado[0].$.TipoFactor) : '',
-                            tasaOCuotaTraslado: traslado ? existsValue(traslado[0].$.TasaOCuota) : '',
-                            importeTraslado: traslado ? existsValue(traslado[0].$.Importe) : '',
-                            baseRetencion: retencion ? existsValue(retencion[0].$.Base) : '',
-                            impuestoRetencion: retencion ? exists(retencion[0].$.Impuesto) : '',
-                            tipoFactorRetencion: retencion ? exists(retencion[0].$.TipoFactor) : '',
-                            tasaOCuotaRetencion: retencion ? existsValue(retencion[0].$.TasaOCuota) : '',
-                            importeRetencion: retencion ? existsValue(retencion[0].$.Importe) : '',
+                            traslados: trasladosArr,
+                            retenciones: retencionesArr,
                         };
                     });
                 }
@@ -291,6 +295,8 @@ export const dataToCfdi = (xmlData: any): Promise<Cfdi> => {
                     obj.retenciones = retencion.map((elem: any) => {
                         return {
                             impuesto: elem.$.Impuesto,
+                            tipoFactor: elem.$.TipoFactor,
+                            tasaOCuota: elem.$.TasaOCuota,
                             importe: elem.$.Importe,
                         };
                     });
