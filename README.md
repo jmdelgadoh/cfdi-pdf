@@ -7,7 +7,13 @@ A small library for generate xml CFDI 3.3 to PDF
 ### ES6 module
 
 ```bash
-npm install --save @ocelotlstudio\cfdi-pdf
+npm install --save @ocelotlstudio/cfdi-pdf
+```
+
+or with yarn
+
+```bash
+yarn add @ocelotlstudio/cfdi-pdf
 ```
 
 ## Usage
@@ -15,10 +21,11 @@ npm install --save @ocelotlstudio\cfdi-pdf
 Then you're ready to generate pdf:
 
 Simple Usage
-```javascript
-import { CfdiPdf } from '@ocelotlstudio\cfdi-pdf';
 
-try{
+```javascript
+import CfdiPdf from '@ocelotlstudio/cfdi-pdf';
+
+try {
     const xmlString = `<?xml version="1.0" encoding="utf-8"?>
         <cfdi:Comprobante Version="3.3" ...>
             ...
@@ -26,21 +33,21 @@ try{
     /**
      * Function to get pdf from valid xml cfdi string
      * @param {string} xml
-     * @param {Options=} options 
+     * @param {Options=} options
      * @returns {Promise<string>} a pdf in base64 string
      */
     const parserData = await CfdiPdf.generatePdf(xmlString);
-}catch(e){
+} catch (e) {
     console.log(e);
 }
-
 ```
 
 With options
-```javascript
-import { CfdiPdf } from '@ocelotlstudio\cfdi-pdf';
 
-try{
+```javascript
+import CfdiPdf from '@ocelotlstudio/cfdi-pdf';
+
+try {
     const xmlString = `<?xml version="1.0" encoding="utf-8"?>
         <cfdi:Comprobante Version="3.3" ...>
             ...
@@ -49,24 +56,24 @@ try{
         text: 'onlytest',
         image: 'imageinbase64',
         cadenaOriginal: 'for visualice correct cadena original',
+        residenciaFiscal: 'receptor address',
     };
 
     /**
      * Function to get pdf from valid xml cfdi string
      * @param {string} xml
-     * @param {Options=} options 
+     * @param {Options=} options
      * @returns {Promise<string>} a pdf in base64 string
      */
     const parserData = await CfdiPdf.generatePdf(xmlString, options);
-}catch(e){
+} catch (e) {
     console.log(e);
 }
-
-
 ```
+
 ## Features
 
-* Generate PDF from types: I, E, T and P
+-   Generate PDF from types: I, E, T and P
 
 ## License
 
