@@ -1,6 +1,6 @@
 {
     "name": "@ocelotlstudio/cfdi-pdf",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Creates a pdf based on an XML CFDI",
     "main": "dist/index.js",
     "files": [
