@@ -5,8 +5,7 @@
         "esModuleInterop": true,
         "sourceMap": true,
         "resolveJsonModule": true,
-        "declaration": true,
-        "declarationDir": "./types"
+        "declaration": true
     },
     "include": ["src/**/*.ts", "src/catalogs/*.json"]
 }
