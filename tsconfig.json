@@ -6,9 +6,7 @@
         "sourceMap": true,
         "resolveJsonModule": true,
         "declaration": true,
-        // This compiler run should
-        // only output d.ts files
-        "emitDeclarationOnly": true
+        "declarationDir": "./types"
     },
     "include": ["src/**/*.ts", "src/catalogs/*.json"]
 }
