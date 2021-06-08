@@ -12,13 +12,13 @@ import {
 import { toCurrency } from '../utils/toCurrency';
 import { formatCurrency, breakEveryNCharacters } from '../utils/helper';
 import { exists, existsValue } from '../utils/check';
-import { Cfdi, ComplementoPago, Concepto, DoctoRelacionado } from '../parser/dataToCfdi';
+import { Cfdi, ComplementoPago, Concepto, DoctoRelacionado, Receptor } from '../parser/dataToCfdi';
 import { TDocumentDefinitions } from 'pdfmake/interfaces';
 
 export interface Options {
     text?: string;
     image?: string;
-    residenciaFiscal?: string;
+    address?: string;
     cadenaOriginal?: string;
 }
 
@@ -251,8 +251,30 @@ const generateStampTable = (json: Cfdi) => {
     return arr;
 };
 
+const generateAddress = (receptor: Receptor, address?: string) => {
+    const arr = [];
+    const addressArray = [];
+    if (address) {
+        addressArray.push('DOMICILIO:', address);
+    }
+    addressArray.push('USO CFDI:', {
+        colSpan: address ? 1 : 3,
+        text: usosCfdiCatalog[receptor.usoCFDI] ? `${receptor.usoCFDI} - ${usosCfdiCatalog[receptor.usoCFDI]}` : '',
+    });
+    arr.push(addressArray);
+    if (receptor.residenciaFiscal && receptor.numRegIdTrib) {
+        arr.push([
+            'RESIDENCIA FISCAL:',
+            exists(receptor.residenciaFiscal),
+            'NUMERO ID TRIB.:',
+            exists(receptor.numRegIdTrib),
+        ]);
+    }
+    return arr;
+};
+
 // generate content array used in PDFMake
-const generateContent = async (json: Cfdi, logo?: string, text?: string) => {
+const generateContent = async (json: Cfdi, logo?: string, text?: string, address?: string) => {
     let content = [];
     // this block contains the logo image and general information
     const header: any = {
@@ -336,15 +358,7 @@ const generateContent = async (json: Cfdi, logo?: string, text?: string) => {
                     {},
                 ],
                 ['NOMBRE:', exists(json.receptor.nombre), 'RFC:', exists(json.receptor.rfc)],
-                [
-                    'RESIDENCIA FISCAL:',
-                    exists(json.receptor.residenciaFiscal),
-                    'USO CFDI:',
-                    usosCfdiCatalog[json.receptor.usoCFDI]
-                        ? `${json.receptor.usoCFDI} - ${usosCfdiCatalog[json.receptor.usoCFDI]}`
-                        : '',
-                ],
-                ['NUMERO ID TRIB.:', { colSpan: 3, text: json.receptor.numRegIdTrib }, ''],
+                ...generateAddress(json.receptor, address),
             ],
         },
         layout: 'lightHorizontalLines',
@@ -497,10 +511,8 @@ export const generatePdfContent = async (json: Cfdi, options: Options) => {
     // eslint-disable-next-line
     const logo = options.image;
     if (options.cadenaOriginal) json.cadenaOriginalCC = options.cadenaOriginal;
-    if (options.residenciaFiscal && !json.receptor.residenciaFiscal)
-        json.receptor.residenciaFiscal = options.residenciaFiscal;
     const dd: TDocumentDefinitions = {
-        content: await generateContent(json, logo, options.text),
+        content: await generateContent(json, logo, options.text, options.address),
         styles: {
             tableHeader: {
                 bold: true,

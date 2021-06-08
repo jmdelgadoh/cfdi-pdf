@@ -56,7 +56,7 @@ try {
         text: 'onlytest',
         image: 'imageinbase64',
         cadenaOriginal: 'for visualice correct cadena original',
-        residenciaFiscal: 'receptor address',
+        address: 'receptor address',
     };
 
     /**

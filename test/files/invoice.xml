@@ -3,7 +3,7 @@
 	<cfdi:Emisor Nombre="ARACELI ROSANO REYES" Rfc="RORA840917FS9" RegimenFiscal="612" />
 	<cfdi:Receptor Nombre="MISAEL LIMON MARTINEZ" Rfc="LIMM960516U19" UsoCFDI="G03" />
 	<cfdi:Conceptos>
-		<cfdi:Concepto ClaveProdServ="85121600" Cantidad="1" ClaveUnidad="ACT" Descripcion="descripcion de este dr." ValorUnitario="57800.00" Importe="57800.00">
+		<cfdi:Concepto ClaveProdServ="85121600" Cantidad="1" ClaveUnidad="ACT" Descripcion="descripción de este dr. año" ValorUnitario="57800.00" Importe="57800.00">
 			<cfdi:Impuestos>
 				<cfdi:Traslados>
 					<cfdi:Traslado TipoFactor="Exento" Impuesto="003" Base="57800" />
@@ -14,7 +14,7 @@
 				</cfdi:Retenciones>
 			</cfdi:Impuestos>
 		</cfdi:Concepto>
-		<cfdi:Concepto ClaveProdServ="85121601" Cantidad="1" ClaveUnidad="ACT" Descripcion="descripcion de este dr." ValorUnitario="57800.00" Importe="57800.00">
+		<cfdi:Concepto ClaveProdServ="85121601" Cantidad="1" ClaveUnidad="ACT" Descripcion="descripción de este dr." ValorUnitario="57800.00" Importe="57800.00">
 			<cfdi:Impuestos>
 				<cfdi:Traslados>
 					<cfdi:Traslado Importe="9248.00" TasaOCuota="0.160000" TipoFactor="Tasa" Impuesto="002" Base="57800" />

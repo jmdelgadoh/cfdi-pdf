@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync } from 'fs';
 import { CfdiPdf } from '../src/CfdiPdf';
 
 describe('CfdiPdf', () => {
@@ -11,5 +11,6 @@ describe('CfdiPdf', () => {
         const fileContent = readFileSync(`${__dirname}/files/invoice.xml`);
         const parserData = await CfdiPdf.generatePdf(fileContent.toString());
         expect(typeof parserData === 'string').toBe(true);
+        // writeFileSync('test.pdf', parserData, { encoding: 'base64' });
     }, 10000);
 });
