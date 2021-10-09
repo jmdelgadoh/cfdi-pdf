@@ -28,7 +28,7 @@ export namespace CfdiPdf {
      * @param {Options=} options 
      * @returns {Promise<string>} a pdf in base64 string
      */
-    export const generatePdf = (xml: string, options: Options = {}): Promise<FinalObject> => {
+    export const generatePdf = (xml: string, options: Options = {}): Promise<string> => {
         pdfMake.tableLayouts = {
             cbBorders: {
                 hLineWidth: function (i, node) {
@@ -70,7 +70,7 @@ export namespace CfdiPdf {
             },
         };
 
-        return new Promise<FinalObject>(async (resolve, reject) => {
+        return new Promise<string>(async (resolve, reject) => {
             try {
                 const xmlData = await parseXml(xml); //converts xml to json
                 const cfdiData = await dataToCfdi(xmlData); // validates CFDI data and returns cfdi data as an object
@@ -79,7 +79,8 @@ export namespace CfdiPdf {
 
                 const pdfDocGenerator = pdfMake.createPdf(content);
                 pdfDocGenerator.getBase64((data) => {
-                    resolve({ data, contentObject: JSON.stringify(content) });
+                    // resolve({ data, contentObject: JSON.stringify(content) });
+                    resolve(data)
                 });
             } catch (e) {
                 reject(e);
