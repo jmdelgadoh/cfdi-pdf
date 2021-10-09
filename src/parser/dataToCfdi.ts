@@ -108,7 +108,12 @@ export class Cfdi {
     cadenaOriginalCC?: string;
 }
 
+/**
+ *
+ * @param {object} xmlData
+ */
 export const dataToCfdi = (xmlData: any): Promise<Cfdi> => {
+
     return new Promise<Cfdi>((resolve, reject) => {
         const obj: Cfdi = new Cfdi();
         try {
