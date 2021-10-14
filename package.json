@@ -16,7 +16,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/OcelotlStudio/cfdi-pdf.git"
+        "url": "git+https://github.com/jmdelgadoh/cfdi-pdf"
     },
     "keywords": [
         "cfdi",
