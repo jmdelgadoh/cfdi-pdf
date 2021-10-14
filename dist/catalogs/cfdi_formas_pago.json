@@ -1,0 +1,90 @@
+[
+    {
+        "id": "01",
+        "texto": "Efectivo"
+    },
+    {
+        "id": "02",
+        "texto": "Cheque nominativo"
+    },
+    {
+        "id": "03",
+        "texto": "Transferencia electrónica de fondos"
+    },
+    {
+        "id": "04",
+        "texto": "Tarjeta de crédito"
+    },
+    {
+        "id": "05",
+        "texto": "Monedero electrónico"
+    },
+    {
+        "id": "06",
+        "texto": "Dinero electrónico"
+    },
+    {
+        "id": "08",
+        "texto": "Vales de despensa"
+    },
+    {
+        "id": "12",
+        "texto": "Dación en pago"
+    },
+    {
+        "id": "13",
+        "texto": "Pago por subrogación"
+    },
+    {
+        "id": "14",
+        "texto": "Pago por consignación"
+    },
+    {
+        "id": "15",
+        "texto": "Condonación"
+    },
+    {
+        "id": "17",
+        "texto": "Compensación"
+    },
+    {
+        "id": "23",
+        "texto": "Novación"
+    },
+    {
+        "id": "24",
+        "texto": "Confusión"
+    },
+    {
+        "id": "25",
+        "texto": "Remisión de deuda"
+    },
+    {
+        "id": "26",
+        "texto": "Prescripción o caducidad"
+    },
+    {
+        "id": "27",
+        "texto": "A satisfacción del acreedor"
+    },
+    {
+        "id": "28",
+        "texto": "Tarjeta de débito"
+    },
+    {
+        "id": "29",
+        "texto": "Tarjeta de servicios"
+    },
+    {
+        "id": "30",
+        "texto": "Aplicación de anticipos"
+    },
+    {
+        "id": "31",
+        "texto": "Intermediario pagos"
+    },
+    {
+        "id": "99",
+        "texto": "Por definir"
+    }
+]

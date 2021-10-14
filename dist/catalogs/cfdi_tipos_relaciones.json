@@ -1,0 +1,38 @@
+[
+    {
+        "id": "01",
+        "texto": "Nota de crédito de los documentos relacionados"
+    },
+    {
+        "id": "02",
+        "texto": "Nota de débito de los documentos relacionados"
+    },
+    {
+        "id": "03",
+        "texto": "Devolución de mercancía sobre facturas o traslados previos"
+    },
+    {
+        "id": "04",
+        "texto": "Sustitución de los CFDI previos"
+    },
+    {
+        "id": "05",
+        "texto": "Traslados de mercancias facturados previamente"
+    },
+    {
+        "id": "06",
+        "texto": "Factura generada por los traslados previos"
+    },
+    {
+        "id": "07",
+        "texto": "CFDI por aplicación de anticipo"
+    },
+    {
+        "id": "08",
+        "texto": "Factura generada por pagos en parcialidades"
+    },
+    {
+        "id": "09",
+        "texto": "Factura generada por pagos diferidos"
+    }
+]

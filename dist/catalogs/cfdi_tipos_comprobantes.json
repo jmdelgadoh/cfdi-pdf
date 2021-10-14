@@ -1,0 +1,22 @@
+[
+    {
+        "id": "I",
+        "texto": "Ingreso"
+    },
+    {
+        "id": "E",
+        "texto": "Egreso"
+    },
+    {
+        "id": "T",
+        "texto": "Traslado"
+    },
+    {
+        "id": "N",
+        "texto": "Nómina"
+    },
+    {
+        "id": "P",
+        "texto": "Pago"
+    }
+]

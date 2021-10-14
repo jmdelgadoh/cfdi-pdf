@@ -1,0 +1,90 @@
+[
+    {
+        "id": "G01",
+        "texto": "Adquisición de mercancias"
+    },
+    {
+        "id": "G02",
+        "texto": "Devoluciones, descuentos o bonificaciones"
+    },
+    {
+        "id": "G03",
+        "texto": "Gastos en general"
+    },
+    {
+        "id": "I01",
+        "texto": "Construcciones"
+    },
+    {
+        "id": "I02",
+        "texto": "Mobilario y equipo de oficina por inversiones"
+    },
+    {
+        "id": "I03",
+        "texto": "Equipo de transporte"
+    },
+    {
+        "id": "I04",
+        "texto": "Equipo de computo y accesorios"
+    },
+    {
+        "id": "I05",
+        "texto": "Dados, troqueles, moldes, matrices y herramental"
+    },
+    {
+        "id": "I06",
+        "texto": "Comunicaciones telefónicas"
+    },
+    {
+        "id": "I07",
+        "texto": "Comunicaciones satelitales"
+    },
+    {
+        "id": "I08",
+        "texto": "Otra maquinaria y equipo"
+    },
+    {
+        "id": "D01",
+        "texto": "Honorarios médicos, dentales y gastos hospitalarios."
+    },
+    {
+        "id": "D02",
+        "texto": "Gastos médicos por incapacidad o discapacidad"
+    },
+    {
+        "id": "D03",
+        "texto": "Gastos funerales."
+    },
+    {
+        "id": "D04",
+        "texto": "Donativos."
+    },
+    {
+        "id": "D05",
+        "texto": "Intereses reales efectivamente pagados por créditos hipotecarios (casa habitación)."
+    },
+    {
+        "id": "D06",
+        "texto": "Aportaciones voluntarias al SAR."
+    },
+    {
+        "id": "D07",
+        "texto": "Primas por seguros de gastos médicos."
+    },
+    {
+        "id": "D08",
+        "texto": "Gastos de transportación escolar obligatoria."
+    },
+    {
+        "id": "D09",
+        "texto": "Depósitos en cuentas para el ahorro, primas que tengan como base planes de pensiones."
+    },
+    {
+        "id": "D10",
+        "texto": "Pagos por servicios educativos (colegiaturas)"
+    },
+    {
+        "id": "P01",
+        "texto": "Por definir"
+    }
+]
